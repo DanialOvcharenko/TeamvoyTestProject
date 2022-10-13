@@ -12,7 +12,7 @@ class Model: Codable {
     
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.articles = try container.decodeIfPresent([Articles].self, forKey: .articles)
+        articles = try container.decodeIfPresent([Articles].self, forKey: .articles)
     }
     
     func encode(to encoder: Encoder) throws {
@@ -22,11 +22,13 @@ class Model: Codable {
 }
 
 
-class Api {
+class Api: ObservableObject {
+    
+    @Published var searched = "Swift"
     
     func getPost(completion: @escaping (Model) -> ()) {
         
-        var url = URL(string: "https://newsapi.org/v2/everything?q=apple&apiKey=699258c470a9430aa7037e0bd0f0f7f6")!
+        var url = URL(string: "https://newsapi.org/v2/everything?q=\(searched)&apiKey=699258c470a9430aa7037e0bd0f0f7f6")!
         
         var request = URLRequest(url: url)
         
@@ -41,6 +43,4 @@ class Api {
         }.resume()
     }
 }
-
-
 

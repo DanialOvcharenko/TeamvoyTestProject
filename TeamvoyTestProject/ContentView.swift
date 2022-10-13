@@ -12,19 +12,7 @@ struct ContentView: View {
     @State private var selectedView = 1
     
     var body: some View {
-        TabView (selection: $selectedView) {
-            PostListView()
-                .tabItem {
-                Image(systemName: "square.and.pencil")
-                Text("Post list")
-            } .tag(1)
-            TestListPosts()
-                .tabItem {
-                Image(systemName: "ellipsis")
-                    
-                Text("Test List of Posts")
-            } .tag(2)
-        }
+        PostListView()
     }
 }
 
